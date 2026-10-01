@@ -1,0 +1,1149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>For Sagna Miss 💗</title>
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&family=Playfair+Display:ital,wght@400;500;600&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --pink: #f7b7c9;
+    --soft-pink: #ffe4ec;
+    --blue: #b9d9f2;
+    --white: #fffafc;
+    --dark: #241c22;
+}
+
+html, body {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    background: #161216;
+    font-family: "DM Sans", sans-serif;
+    color: white;
+}
+
+button {
+    font: inherit;
+}
+
+/* ---------- COMMON ---------- */
+
+.screen {
+    position: fixed;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    display: none;
+    overflow: hidden;
+}
+
+.screen.active {
+    display: flex;
+}
+
+/* ---------- INTRO ---------- */
+
+#intro {
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    background:
+        radial-gradient(circle at 20% 20%, rgba(247,183,201,.25), transparent 32%),
+        radial-gradient(circle at 80% 75%, rgba(185,217,242,.25), transparent 34%),
+        linear-gradient(135deg, #211b20, #35242e 52%, #202a35);
+}
+
+.intro-glow {
+    position: absolute;
+    width: 55vw;
+    height: 55vw;
+    max-width: 700px;
+    max-height: 700px;
+    border-radius: 50%;
+    background: rgba(255, 210, 225, .08);
+    filter: blur(60px);
+}
+
+.intro-content {
+    position: relative;
+    z-index: 2;
+    width: min(900px, 90%);
+    animation: introIn 1.6s ease forwards;
+}
+
+.intro-small {
+    font-size: 12px;
+    letter-spacing: 6px;
+    text-transform: uppercase;
+    color: #f8c9d8;
+    margin-bottom: 28px;
+}
+
+.intro-title {
+    font-family: "Playfair Display", serif;
+    font-size: clamp(48px, 8vw, 105px);
+    line-height: .98;
+    font-weight: 500;
+    letter-spacing: -2px;
+}
+
+.intro-title span {
+    display: block;
+    font-style: italic;
+    color: #ffd9e5;
+}
+
+.intro-sub {
+    margin: 30px auto 0;
+    max-width: 650px;
+    font-family: "Playfair Display", serif;
+    font-size: clamp(18px, 2.2vw, 27px);
+    line-height: 1.65;
+    color: #f6e9ee;
+}
+
+.heart {
+    display: inline-block;
+    animation: heartBeat 1.6s ease-in-out infinite;
+}
+
+/* ---------- COUNTDOWN ---------- */
+
+#countdown {
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    background:
+        linear-gradient(rgba(20,16,20,.78), rgba(20,16,20,.88)),
+        radial-gradient(circle at center, #513747, #171318 70%);
+}
+
+.count-content {
+    position: relative;
+    z-index: 3;
+    animation: fadeUp .9s ease;
+}
+
+.count-label {
+    text-transform: uppercase;
+    letter-spacing: 5px;
+    font-size: 11px;
+    color: #f3c9d7;
+    margin-bottom: 24px;
+}
+
+#countNumber {
+    font-family: "Playfair Display", serif;
+    font-size: clamp(110px, 20vw, 230px);
+    line-height: .9;
+    font-weight: 400;
+}
+
+.count-text {
+    margin-top: 22px;
+    font-family: "Playfair Display", serif;
+    font-style: italic;
+    color: #eadde2;
+    font-size: 20px;
+}
+
+.begin-btn {
+    margin-top: 35px;
+    padding: 15px 34px;
+    border: 1px solid rgba(255,255,255,.35);
+    border-radius: 999px;
+    background: rgba(255,255,255,.08);
+    color: white;
+    cursor: pointer;
+    transition: .35s ease;
+    opacity: 0;
+    pointer-events: none;
+}
+
+.begin-btn.show {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.begin-btn:hover {
+    transform: translateY(-3px);
+    background: rgba(255,255,255,.16);
+    box-shadow: 0 15px 45px rgba(0,0,0,.25);
+}
+
+/* ---------- MEMORY SLIDES ---------- */
+
+#memories {
+    background: #090709;
+    align-items: center;
+    justify-content: center;
+}
+
+.photo-layer {
+    position: absolute;
+    inset: 0;
+    overflow: hidden;
+    background: #111;
+}
+
+.memory-photo {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+
+    /* FULL SCREEN FILL */
+    object-fit: cover;
+    object-position: center;
+
+    opacity: 0;
+    transform: scale(1.10);
+    transition:
+        opacity 2s ease-in-out,
+        transform 7s ease-out;
+
+    filter: saturate(.9) brightness(.72);
+}
+
+.memory-photo.active {
+    opacity: 1;
+    transform: scale(1);
+}
+
+.photo-overlay {
+    position: absolute;
+    inset: 0;
+    z-index: 5;
+    pointer-events: none;
+    background:
+        linear-gradient(to bottom,
+            rgba(10,8,10,.45) 0%,
+            rgba(10,8,10,.05) 28%,
+            rgba(10,8,10,.08) 65%,
+            rgba(10,8,10,.68) 100%);
+}
+
+.photo-softness {
+    position: absolute;
+    inset: 0;
+    z-index: 6;
+    pointer-events: none;
+    box-shadow: inset 0 0 150px rgba(0,0,0,.48);
+}
+
+.memory-top {
+    position: absolute;
+    z-index: 10;
+    top: 34px;
+    left: 40px;
+    right: 40px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 11px;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: rgba(255,255,255,.78);
+}
+
+.music-tag {
+    padding: 10px 17px;
+    border: 1px solid rgba(255,255,255,.25);
+    border-radius: 999px;
+    background: rgba(0,0,0,.2);
+    backdrop-filter: blur(12px);
+}
+
+.memory-caption {
+    position: absolute;
+    z-index: 10;
+    bottom: 85px;
+    left: 50%;
+    transform: translateX(-50%);
+    text-align: center;
+    width: min(900px, 88%);
+}
+
+.memory-caption .eyebrow {
+    font-size: 11px;
+    letter-spacing: 5px;
+    text-transform: uppercase;
+    color: #f8c9d8;
+    margin-bottom: 16px;
+}
+
+.memory-caption h2 {
+    font-family: "Playfair Display", serif;
+    font-weight: 400;
+    font-size: clamp(34px, 5vw, 68px);
+}
+
+.memory-caption p {
+    margin-top: 14px;
+    font-family: "Playfair Display", serif;
+    font-style: italic;
+    font-size: clamp(16px, 2vw, 23px);
+    color: #f2e6eb;
+}
+
+.message-btn {
+    position: absolute;
+    z-index: 20;
+    left: 50%;
+    bottom: 28px;
+    transform: translateX(-50%) translateY(20px);
+    padding: 15px 30px;
+    border-radius: 999px;
+    border: 1px solid rgba(255,255,255,.45);
+    color: white;
+    background: rgba(28,22,27,.58);
+    backdrop-filter: blur(15px);
+    cursor: pointer;
+    opacity: 0;
+    pointer-events: none;
+    transition: .7s ease;
+    white-space: nowrap;
+}
+
+.message-btn.show {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+    pointer-events: auto;
+}
+
+.message-btn:hover {
+    background: rgba(255,255,255,.16);
+    transform: translateX(-50%) translateY(-2px);
+}
+
+/* ---------- MESSAGE ---------- */
+
+#message {
+    align-items: center;
+    justify-content: center;
+    background:
+        radial-gradient(circle at 10% 20%, rgba(247,183,201,.18), transparent 30%),
+        radial-gradient(circle at 90% 80%, rgba(185,217,242,.16), transparent 30%),
+        #171317;
+}
+
+.message-bg {
+    position: absolute;
+    inset: 0;
+    opacity: .25;
+}
+
+.message-bg img {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    filter: blur(3px);
+    opacity: .45;
+}
+
+.message-shade {
+    position: absolute;
+    inset: 0;
+    background: rgba(18,13,17,.73);
+}
+
+.letter {
+    position: relative;
+    z-index: 5;
+    width: min(900px, 88%);
+    max-height: 82vh;
+    overflow-y: auto;
+    padding: clamp(32px, 6vw, 70px);
+    border: 1px solid rgba(255,255,255,.15);
+    border-radius: 28px;
+    background: rgba(255,248,251,.95);
+    color: #33272d;
+    box-shadow: 0 35px 100px rgba(0,0,0,.35);
+    animation: letterIn 1.1s cubic-bezier(.2,.8,.2,1);
+}
+
+.letter::-webkit-scrollbar {
+    width: 5px;
+}
+
+.letter::-webkit-scrollbar-thumb {
+    background: #e5b1c1;
+    border-radius: 20px;
+}
+
+.letter-small {
+    text-align: center;
+    text-transform: uppercase;
+    letter-spacing: 4px;
+    font-size: 10px;
+    color: #b9788e;
+    margin-bottom: 18px;
+}
+
+.letter h1 {
+    text-align: center;
+    font-family: "Playfair Display", serif;
+    font-size: clamp(35px, 5vw, 65px);
+    font-weight: 500;
+    color: #33272d;
+}
+
+.letter-divider {
+    width: 65px;
+    height: 1px;
+    background: #d9a4b5;
+    margin: 25px auto 30px;
+}
+
+.letter p {
+    font-family: "Playfair Display", serif;
+    font-size: clamp(17px, 2vw, 21px);
+    line-height: 1.85;
+    margin-bottom: 20px;
+}
+
+.letter .signature {
+    text-align: right;
+    font-style: italic;
+    color: #9c6277;
+    margin-top: 35px;
+}
+
+.final-btn {
+    display: block;
+    margin: 28px auto 0;
+    padding: 13px 27px;
+    border: 1px solid #d4a0b1;
+    border-radius: 999px;
+    background: transparent;
+    color: #8f596d;
+    cursor: pointer;
+    transition: .3s;
+}
+
+.final-btn:hover {
+    background: #f7dce5;
+}
+
+
+/* ---------- FINAL PHOTO GALLERY ---------- */
+
+#photoGallery {
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    background:
+        radial-gradient(circle at 15% 20%, rgba(255,190,215,.38), transparent 28%),
+        radial-gradient(circle at 85% 75%, rgba(190,220,250,.32), transparent 30%),
+        linear-gradient(135deg, #fff8fb, #f8eef4 48%, #eef6fb);
+    color: #3b2932;
+}
+
+.gallery-wrap {
+    position: relative;
+    z-index: 4;
+    width: min(1100px, 92%);
+    animation: galleryIn 1.2s cubic-bezier(.2,.8,.2,1);
+}
+
+.gallery-kicker {
+    font-size: 11px;
+    letter-spacing: 5px;
+    text-transform: uppercase;
+    color: #b9788e;
+    margin-bottom: 12px;
+}
+
+.gallery-title {
+    font-family: "Playfair Display", serif;
+    font-size: clamp(34px, 5vw, 62px);
+    font-weight: 500;
+    color: #392a31;
+}
+
+.gallery-subtitle {
+    margin: 10px auto 30px;
+    font-family: "Playfair Display", serif;
+    font-style: italic;
+    font-size: clamp(16px, 2vw, 21px);
+    color: #765866;
+}
+
+.gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: clamp(16px, 3vw, 30px);
+    align-items: center;
+}
+
+.gallery-card {
+    position: relative;
+    padding: 10px 10px 18px;
+    background: rgba(255,255,255,.88);
+    border: 1px solid rgba(255,255,255,.9);
+    border-radius: 18px;
+    box-shadow: 0 18px 45px rgba(116,75,94,.15);
+    backdrop-filter: blur(10px);
+    transform: rotate(var(--tilt));
+    animation: cardFloat 5s ease-in-out infinite;
+}
+
+.gallery-card:nth-child(2) { animation-delay: .7s; }
+.gallery-card:nth-child(3) { animation-delay: 1.4s; }
+
+.gallery-card img {
+    display: block;
+    width: 100%;
+    aspect-ratio: 4 / 5;
+    object-fit: cover;
+    border-radius: 12px;
+}
+
+.gallery-card span {
+    display: block;
+    margin-top: 12px;
+    font-family: "Playfair Display", serif;
+    font-size: 15px;
+    color: #805b6b;
+}
+
+.gallery-next {
+    margin-top: 28px;
+    padding: 13px 28px;
+    border: 1px solid #d4a0b1;
+    border-radius: 999px;
+    background: rgba(255,255,255,.7);
+    color: #8f596d;
+    cursor: pointer;
+    transition: .3s ease;
+}
+
+.gallery-next:hover {
+    transform: translateY(-3px);
+    background: #fff;
+    box-shadow: 0 12px 30px rgba(116,75,94,.14);
+}
+
+/* Canva-style soft floating bubbles */
+.bubbles {
+    position: absolute;
+    inset: 0;
+    overflow: hidden;
+    pointer-events: none;
+    z-index: 1;
+}
+
+.bubble {
+    position: absolute;
+    bottom: -120px;
+    border-radius: 50%;
+    background: rgba(255,255,255,.38);
+    border: 1px solid rgba(255,255,255,.55);
+    box-shadow:
+        inset 8px 8px 18px rgba(255,255,255,.45),
+        0 8px 25px rgba(177,133,157,.08);
+    animation: bubbleRise linear infinite;
+}
+
+.bubble:nth-child(1){width:75px;height:75px;left:5%;animation-duration:14s;animation-delay:0s}
+.bubble:nth-child(2){width:32px;height:32px;left:17%;animation-duration:10s;animation-delay:2s}
+.bubble:nth-child(3){width:105px;height:105px;left:29%;animation-duration:17s;animation-delay:5s}
+.bubble:nth-child(4){width:45px;height:45px;left:47%;animation-duration:12s;animation-delay:1s}
+.bubble:nth-child(5){width:82px;height:82px;left:61%;animation-duration:15s;animation-delay:4s}
+.bubble:nth-child(6){width:28px;height:28px;left:75%;animation-duration:9s;animation-delay:2s}
+.bubble:nth-child(7){width:120px;height:120px;left:87%;animation-duration:19s;animation-delay:6s}
+.bubble:nth-child(8){width:38px;height:38px;left:40%;animation-duration:11s;animation-delay:7s}
+
+@keyframes bubbleRise {
+    0% { transform: translateY(0) scale(.85); opacity: 0; }
+    12% { opacity: .7; }
+    55% { transform: translateY(-55vh) translateX(22px) scale(1); opacity: .55; }
+    100% { transform: translateY(-120vh) translateX(-18px) scale(1.08); opacity: 0; }
+}
+
+@keyframes galleryIn {
+    from { opacity: 0; transform: translateY(35px) scale(.97); }
+    to { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+@keyframes cardFloat {
+    0%,100% { transform: translateY(0) rotate(var(--tilt)); }
+    50% { transform: translateY(-8px) rotate(var(--tilt)); }
+}
+
+@media (max-width: 700px) {
+    .gallery-wrap { width: 91%; }
+    .gallery-grid { gap: 9px; }
+    .gallery-card { padding: 7px 7px 12px; border-radius: 13px; }
+    .gallery-card img { border-radius: 9px; }
+    .gallery-card span { font-size: 12px; margin-top: 8px; }
+    .gallery-subtitle { margin-bottom: 20px; }
+    .gallery-next { margin-top: 20px; }
+}
+
+/* ---------- FINAL ---------- */
+
+#final {
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    background:
+        radial-gradient(circle at center, rgba(247,183,201,.22), transparent 40%),
+        linear-gradient(135deg, #231a20, #33202c);
+}
+
+.final-content {
+    position: relative;
+    z-index: 3;
+    width: min(850px, 90%);
+    animation: fadeUp 1.4s ease;
+}
+
+.final-heart {
+    font-size: 55px;
+    animation: heartBeat 1.5s infinite;
+    margin-bottom: 25px;
+}
+
+.final-content h1 {
+    font-family: "Playfair Display", serif;
+    font-size: clamp(45px, 8vw, 95px);
+    font-weight: 500;
+    line-height: 1;
+}
+
+.final-content h1 span {
+    color: #ffd3df;
+    font-style: italic;
+}
+
+.final-content p {
+    margin: 28px auto 0;
+    max-width: 650px;
+    font-family: "Playfair Display", serif;
+    font-size: clamp(17px, 2vw, 23px);
+    line-height: 1.7;
+    color: #f2e4ea;
+}
+
+/* ---------- FLOATING HEARTS ---------- */
+
+.floating {
+    position: absolute;
+    inset: 0;
+    overflow: hidden;
+    pointer-events: none;
+}
+
+.float-heart {
+    position: absolute;
+    bottom: -50px;
+    color: rgba(255,205,220,.5);
+    animation: floatUp linear infinite;
+}
+
+/* ---------- ANIMATIONS ---------- */
+
+@keyframes introIn {
+    from { opacity: 0; transform: translateY(25px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeUp {
+    from { opacity: 0; transform: translateY(25px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes letterIn {
+    from { opacity: 0; transform: translateY(45px) scale(.97); }
+    to { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+@keyframes heartBeat {
+    0%, 100% { transform: scale(1); }
+    15% { transform: scale(1.15); }
+    30% { transform: scale(1); }
+}
+
+@keyframes floatUp {
+    from {
+        transform: translateY(0) rotate(0deg);
+        opacity: 0;
+    }
+    10% { opacity: .65; }
+    90% { opacity: .4; }
+    to {
+        transform: translateY(-110vh) rotate(25deg);
+        opacity: 0;
+    }
+}
+
+/* ---------- MOBILE ---------- */
+
+@media (max-width: 700px) {
+    .memory-top {
+        top: 20px;
+        left: 18px;
+        right: 18px;
+    }
+
+    .music-tag {
+        padding: 8px 12px;
+        font-size: 9px;
+        letter-spacing: 2px;
+    }
+
+    .memory-caption {
+        bottom: 105px;
+    }
+
+    .message-btn {
+        bottom: 22px;
+        font-size: 13px;
+        padding: 13px 21px;
+    }
+
+    .letter {
+        width: 92%;
+        max-height: 86vh;
+        border-radius: 22px;
+    }
+
+    .letter p {
+        line-height: 1.7;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<!-- INTRO -->
+<section class="screen active" id="intro">
+    <div class="intro-glow"></div>
+
+    <div class="floating">
+        <span class="float-heart" style="left:8%;animation-duration:10s;font-size:18px;">♡</span>
+        <span class="float-heart" style="left:20%;animation-duration:14s;animation-delay:2s;font-size:25px;">♡</span>
+        <span class="float-heart" style="left:42%;animation-duration:12s;animation-delay:4s;font-size:15px;">♡</span>
+        <span class="float-heart" style="left:68%;animation-duration:15s;animation-delay:1s;font-size:28px;">♡</span>
+        <span class="float-heart" style="left:88%;animation-duration:11s;animation-delay:3s;font-size:20px;">♡</span>
+    </div>
+
+    <div class="intro-content">
+        <div class="intro-small">A little something from the heart</div>
+
+        <h1 class="intro-title">
+            Happiest Birthday
+            <span>Sagna Miss <span class="heart">♡</span></span>
+        </h1>
+
+        <p class="intro-sub">
+            For the teacher who has been more than just a teacher —
+            someone who always made things a little easier, a little brighter,
+            and a lot more meaningful.
+        </p>
+
+        <button class="begin-btn show" id="introNext">
+            Continue with me&nbsp; ♡
+        </button>
+    </div>
+</section>
+
+
+<!-- COUNTDOWN -->
+<section class="screen" id="countdown">
+    <div class="count-content">
+        <div class="count-label">Before the little surprise</div>
+        <div id="countNumber">10</div>
+        <div class="count-text">Just give me a few seconds...</div>
+
+        <button class="begin-btn" id="beginBtn">
+            Click to Begin&nbsp; ✨
+        </button>
+    </div>
+</section>
+
+
+<!-- MEMORIES -->
+<section class="screen" id="memories">
+
+    <div class="photo-layer">
+
+        <!-- ONLY THESE 3 PHOTOS -->
+        <img
+            class="memory-photo active"
+            src="https://i.postimg.cc/TY1Qvxqf/Whats-App-Image-2026-10-01-at-7-53-17-PM.jpg"
+            alt="Memory 1"
+        >
+
+        <img
+            class="memory-photo"
+            src="https://i.postimg.cc/15XM1ScP/Whats-App-Image-2026-10-01-at-7-53-18-PM.jpg"
+            alt="Memory 2"
+        >
+
+        <img
+            class="memory-photo"
+            src="https://i.postimg.cc/L65vFSBp/Whats-App-Image-2026-10-01-at-7-53-18-PM-(1).jpg"
+            alt="Memory 3"
+        >
+
+        <div class="photo-overlay"></div>
+        <div class="photo-softness"></div>
+    </div>
+
+    <div class="memory-top">
+        <div>For Sagna Miss ♡</div>
+        <div class="music-tag">♫ a song I sang for you</div>
+    </div>
+
+    <div class="memory-caption">
+        <div class="eyebrow">A few moments</div>
+        <h2>Some memories deserve to stay.</h2>
+        <p>And some people deserve to know how much they mean.</p>
+    </div>
+
+    <button class="message-btn" id="messageBtn">
+        I have a message ready for you&nbsp; 💌
+    </button>
+
+</section>
+
+
+<!-- MESSAGE -->
+<section class="screen" id="message">
+
+    <div class="message-bg">
+        <img src="https://i.postimg.cc/QMr20VLm/Whats-App-Image-2026-10-01-at-7-05-54-PM.jpg">
+    </div>
+
+    <div class="message-shade"></div>
+
+    <div class="letter">
+
+        <div class="letter-small">A message from my heart</div>
+
+        <h1>Dear Sagna Miss,</h1>
+
+        <div class="letter-divider"></div>
+
+        <p>
+            Happiest birthday, Miss. 🫂💗
+        </p>
+
+        <p>
+            I am honestly a little sad that I came to know about Miss's
+            birthday so late. If I had known earlier, I would have wanted
+            to do so much more for you.
+        </p>
+
+        <p>
+            But to tell the truth, I love Miss a lot. Whenever I have a
+            problem, somehow Miss always finds a way to make things feel
+            easier. Whenever I feel lost or defeated, Miss has stood by me
+            and given me the courage to keep going.
+        </p>
+
+        <p>
+            There are many things that people say and then forget.
+            But what I am saying now is something I genuinely mean.
+            I will always be proud to say that you are my Miss.
+        </p>
+
+        <p>
+            I think the reason I feel this way is because I was lucky enough
+            to get a teacher who knows how to hold everyone together —
+            someone who makes people feel heard, supported and valued.
+        </p>
+
+        <p>
+            I don't know whether every sentence I wrote is grammatically
+            perfect, but every word is written knowingly and sincerely.
+            That's what matters to me.
+        </p>
+
+        <p>
+            Thank you for being the kind of teacher whose presence itself
+            gives courage. Thank you for every little thing you have done,
+            even the things you may not remember anymore.
+        </p>
+
+        <p class="signature">
+            With lots of love and gratitude,<br>
+            Pooja ♡
+        </p>
+
+        <button class="final-btn" id="finalBtn">
+            One last thing... ♡
+        </button>
+
+    </div>
+</section>
+
+
+<!-- FINAL PHOTO GALLERY -->
+<section class="screen" id="photoGallery">
+
+    <div class="bubbles" aria-hidden="true">
+        <span class="bubble"></span><span class="bubble"></span>
+        <span class="bubble"></span><span class="bubble"></span>
+        <span class="bubble"></span><span class="bubble"></span>
+        <span class="bubble"></span><span class="bubble"></span>
+    </div>
+
+    <div class="gallery-wrap">
+        <div class="gallery-kicker">One more little memory</div>
+        <h1 class="gallery-title">Three moments, kept forever. ♡</h1>
+        <p class="gallery-subtitle">Some pictures are too special to be shown only once.</p>
+
+        <div class="gallery-grid">
+            <div class="gallery-card" style="--tilt:-3deg">
+                <img src="https://i.postimg.cc/TY1Qvxqf/Whats-App-Image-2026-10-01-at-7-53-17-PM.jpg" alt="Memory 1">
+                <span>A beautiful moment ♡</span>
+            </div>
+
+            <div class="gallery-card" style="--tilt:2deg">
+                <img src="https://i.postimg.cc/15XM1ScP/Whats-App-Image-2026-10-01-at-7-53-18-PM.jpg" alt="Memory 2">
+                <span>A memory to keep ♡</span>
+            </div>
+
+            <div class="gallery-card" style="--tilt:-2deg">
+                <img src="https://i.postimg.cc/L65vFSBp/Whats-App-Image-2026-10-01-at-7-53-18-PM-(1).jpg" alt="Memory 3">
+                <span>A moment worth remembering ♡</span>
+            </div>
+        </div>
+
+        <button class="gallery-next" id="galleryNext">And one last thing... ✨</button>
+    </div>
+</section>
+
+
+<!-- FINAL -->
+<section class="screen" id="final">
+
+    <div class="floating">
+        <span class="float-heart" style="left:7%;animation-duration:10s;font-size:25px;">♡</span>
+        <span class="float-heart" style="left:18%;animation-duration:13s;animation-delay:2s;font-size:18px;">♡</span>
+        <span class="float-heart" style="left:39%;animation-duration:11s;animation-delay:1s;font-size:28px;">♡</span>
+        <span class="float-heart" style="left:61%;animation-duration:14s;animation-delay:3s;font-size:20px;">♡</span>
+        <span class="float-heart" style="left:83%;animation-duration:12s;animation-delay:4s;font-size:30px;">♡</span>
+    </div>
+
+    <div class="final-content">
+        <div class="final-heart">♡</div>
+
+        <h1>
+            Happiest Happiest<br>
+            <span>Birthday, Fav Miss!</span>
+        </h1>
+
+        <p>
+            I hope this year brings you the same kindness, comfort and
+            happiness that you have given to so many of us.
+            You will always be someone I am grateful to have met.
+        </p>
+    </div>
+
+</section>
+
+
+<!-- SONG -->
+<video
+    id="song"
+    preload="auto"
+    playsinline
+    loop
+    style="display:none;"
+>
+    <source
+        src="https://www.image2url.com/r2/default/videos/1790863771941-d1d47bbc-65b2-4977-b1d1-4138814af0c0.mp4"
+        type="video/mp4"
+    >
+</video>
+
+
+<script>
+const screens = {
+    intro: document.getElementById("intro"),
+    countdown: document.getElementById("countdown"),
+    memories: document.getElementById("memories"),
+    message: document.getElementById("message"),
+    photoGallery: document.getElementById("photoGallery"),
+    final: document.getElementById("final")
+};
+
+function showScreen(screen) {
+    Object.values(screens).forEach(s => s.classList.remove("active"));
+    screens[screen].classList.add("active");
+}
+
+/* ---------- INTRO -> COUNTDOWN ---------- */
+
+document.getElementById("introNext").addEventListener("click", () => {
+    showScreen("countdown");
+    startCountdown();
+});
+
+
+/* ---------- COUNTDOWN ---------- */
+
+let countdownStarted = false;
+
+function startCountdown() {
+
+    if (countdownStarted) return;
+    countdownStarted = true;
+
+    const number = document.getElementById("countNumber");
+    const button = document.getElementById("beginBtn");
+
+    let count = 10;
+    number.textContent = count;
+
+    const timer = setInterval(() => {
+
+        count--;
+
+        if (count > 0) {
+            number.animate(
+                [
+                    { opacity: 0, transform: "scale(.7)" },
+                    { opacity: 1, transform: "scale(1)" }
+                ],
+                { duration: 500, easing: "ease-out" }
+            );
+
+            number.textContent = count;
+        }
+
+        if (count === 0) {
+            clearInterval(timer);
+
+            number.textContent = "♡";
+            document.querySelector(".count-text").textContent =
+                "Now let me show you something special...";
+
+            button.classList.add("show");
+        }
+
+    }, 1000);
+}
+
+
+/* ---------- START MUSIC + MEMORIES ---------- */
+
+const song = document.getElementById("song");
+const photos = document.querySelectorAll(".memory-photo");
+const messageBtn = document.getElementById("messageBtn");
+
+let currentPhoto = 0;
+let slideshowTimer = null;
+
+document.getElementById("beginBtn").addEventListener("click", async () => {
+
+    showScreen("memories");
+
+    /*
+       Because browsers block autoplay with sound,
+       music starts from this user click.
+    */
+    try {
+        song.volume = 1;
+        await song.play();
+    } catch (error) {
+        console.log("Music could not autoplay:", error);
+    }
+
+    startPhotoShow();
+});
+
+
+/* ---------- ONLY 3 PHOTO FADE SLIDESHOW ---------- */
+
+function startPhotoShow() {
+
+    if (slideshowTimer) clearInterval(slideshowTimer);
+
+    currentPhoto = 0;
+
+    photos.forEach((photo, index) => {
+        photo.classList.toggle("active", index === 0);
+    });
+
+    /*
+       Each photo stays for 5 seconds.
+       After the third photo, the slideshow stops changing,
+       but the song continues playing.
+    */
+    slideshowTimer = setInterval(() => {
+
+        if (currentPhoto < photos.length - 1) {
+
+            photos[currentPhoto].classList.remove("active");
+
+            currentPhoto++;
+
+            photos[currentPhoto].classList.add("active");
+
+        } else {
+
+            clearInterval(slideshowTimer);
+
+            /*
+              After all 3 photos have played,
+              reveal the message button.
+            */
+            setTimeout(() => {
+                messageBtn.classList.add("show");
+            }, 1200);
+        }
+
+    }, 5000);
+}
+
+
+/* ---------- MESSAGE ---------- */
+
+messageBtn.addEventListener("click", () => {
+
+    /*
+       DO NOT stop or restart the song.
+       It keeps playing while the message opens.
+    */
+    showScreen("message");
+});
+
+
+
+document.getElementById("finalBtn").addEventListener("click", () => {
+    showScreen("photoGallery");
+});
+
+document.getElementById("galleryNext").addEventListener("click", () => {
+    showScreen("final");
+});
+
+/*
+   If the MP4 finishes despite loop,
+   make absolutely sure it continues.
+*/
+song.addEventListener("ended", () => {
+    song.currentTime = 0;
+    song.play().catch(() => {});
+});
+</script>
+
+</body>
+</html>
